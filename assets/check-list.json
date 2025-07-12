@@ -1,0 +1,156 @@
+{
+  "8-9": {
+    "version": "8 → 9",
+    "items": [
+      "Ensure Node.js ≥10.13 and npm/Yarn stable: `nvm use 10.13` or `nvm install 10.13`",
+      "Clean workspace by deleting node_modules and package-lock.json: `rm -rf node_modules package-lock.json`",
+      "Update Angular CLI and core to v9: `ng update @angular/cli@9 @angular/core@9`",
+      "Upgrade TypeScript to ≥3.6: `npm install typescript@>=3.6 <3.8`",
+      "Enable Ivy (default in v9) in tsconfig.json: `angularCompilerOptions: { \"enableIvy\": true }`",
+      "Refactor lazy-loaded routes to dynamic imports: `loadChildren: () => import('./module').then(m => m.Module)`",
+      "If using i18n, add Angular localize: `ng add @angular/localize`",
+      "Update dependencies like RxJS and Angular Material: `ng update rxjs @angular/material@9`",
+      "Run ngcc for third-party libraries if needed: `ngcc --properties es2015 browser module main --first-only`",
+      "Rebuild and test: `ng build && ng test && ng e2e`"
+    ]
+  },
+  "9-10": {
+    "version": "9 → 10",
+    "items": [
+      "Ensure Node.js ≥10.13: `nvm use 10.13` or `nvm install 10.13`",
+      "Update Angular CLI and core to v10: `ng update @angular/cli@10 @angular/core@10`",
+      "Upgrade TypeScript to ≥3.9: `npm install typescript@>=3.9 <4.0`",
+      "Update RxJS to ≥6.5.5: `ng update rxjs`",
+      "Check and refactor deprecated APIs (e.g., TestBed.get to TestBed.inject): `ng update`",
+      "Update Angular Material to v10 if used: `ng update @angular/material@10`",
+      "Remove IE 9/10 polyfills from browserslist: `not IE 9-10`",
+      "Rebuild and test: `ng build && ng test && ng e2e`"
+    ]
+  },
+  "10-11": {
+    "version": "10 → 11",
+    "items": [
+      "Ensure Node.js ≥12.14: `nvm use 12.14` or `nvm install 12.14`",
+      "Update Angular CLI and core to v11: `ng update @angular/cli@11 @angular/core@11`",
+      "Upgrade TypeScript to ≥4.0: `npm install typescript@>=4.0 <4.2`",
+      "Remove deprecated APIs (e.g., legacy FormBuilder.group): `ng update`",
+      "Run CLI migration scripts: `ng update --force`",
+      "Update Angular Material to v11 if used: `ng update @angular/material@11`",
+      "Enable Hot Module Replacement (optional): `ng serve --hmr`",
+      "Rebuild and test: `ng build && ng test && ng e2e`"
+    ]
+  },
+  "11-12": {
+    "version": "11 → 12",
+    "items": [
+      "Ensure Node.js ≥12.20 or ≥14.15: `nvm use 14.15` or `nvm install 14.15`",
+      "Update Angular CLI and core to v12: `ng update @angular/cli@12 @angular/core@12`",
+      "Upgrade TypeScript to ≥4.2: `npm install typescript@>=4.2 <4.4`",
+      "Enable strict mode in tsconfig.json (optional): `\"strict\": true`",
+      "Remove View Engine (deprecated) from tsconfig.json: Remove `enableIvy: false`",
+      "Update Angular Material to v12 if used: `ng update @angular/material@12`",
+      "Check for deprecated async pipe patterns: `ng update`",
+      "Rebuild and test: `ng build && ng test && ng e2e`"
+    ]
+  },
+  "12-13": {
+    "version": "12 → 13",
+    "items": [
+      "Ensure Node.js ≥14.15: `nvm use 14.15` or `nvm install 14.15`",
+      "Update Angular CLI and core to v13: `ng update @angular/cli@13 @angular/core@13`",
+      "Upgrade TypeScript to ≥4.4: `npm install typescript@>=4.4 <4.6`",
+      "Remove IE11 support from browserslist: `not IE 11`",
+      "Enable persistent build cache in angular.json: `\"cache\": { \"enabled\": true }`",
+      "Update Angular Material to v13 if used: `ng update @angular/material@13`",
+      "Rebuild and test: `ng build && ng test && ng e2e`"
+    ]
+  },
+  "13-14": {
+    "version": "13 → 14",
+    "items": [
+      "Ensure Node.js ≥14.15 or ≥16.10: `nvm use 16.10` or `nvm install 16.10`",
+      "Update Angular CLI and core to v14: `ng update @angular/cli@14 @angular/core@14`",
+      "Upgrade TypeScript to ≥4.6: `npm install typescript@>=4.6 <4.8`",
+      "Adopt standalone components (optional): `ng generate component --standalone`",
+      "Enable typed reactive forms: `new FormControl<string>('')`",
+      "Update Angular Material to v14 if used: `ng update @angular/material@14`",
+      "Check for deprecated router APIs: `ng update`",
+      "Rebuild and test: `ng build && ng test && ng e2e`"
+    ]
+  },
+  "14-15": {
+    "version": "14 → 15",
+    "items": [
+      "Ensure Node.js ≥14.20 or ≥16.13: `nvm use 16.13` or `nvm install 16.13`",
+      "Update Angular CLI and core to v15: `ng update @angular/cli@15 @angular/core@15`",
+      "Upgrade TypeScript to ≥4.8: `npm install typescript@>=4.8 <4.9`",
+      "Stabilize standalone components: Refactor NgModule to standalone",
+      "Migrate to MDC-based Angular Material: `ng update @angular/material@15`",
+      "Use functional route guards: `canActivate: [() => true]`",
+      "Rebuild and test: `ng build && ng test && ng e2e`"
+    ]
+  },
+  "15-16": {
+    "version": "15 → 16",
+    "items": [
+      "Ensure Node.js ≥16.14 or ≥18.10: `nvm use 18.10` or `nvm install 18.10`",
+      "Update Angular CLI and core to v16: `ng update @angular/cli@16 @angular/core@16`",
+      "Upgrade TypeScript to ≥4.9: `npm install typescript@>=4.9 <5.0`",
+      "Introduce Signals API (optional): Use `signal()` for reactive state",
+      "Enable hydration for SSR in app.module.ts: `provideClientHydration()`",
+      "Use DestroyRef for lifecycle hooks: `inject(DestroyRef).onDestroy(() => {...})`",
+      "Update Angular Material to v16 if used: `ng update @angular/material@16`",
+      "Rebuild and test: `ng build && ng test && ng e2e`"
+    ]
+  },
+  "16-17": {
+    "version": "16 → 17",
+    "items": [
+      "Ensure Node.js ≥18.13: `nvm use 18.13` or `nvm install 18.13`",
+      "Update Angular CLI and core to v17: `ng update @angular/cli@17 @angular/core@17`",
+      "Upgrade TypeScript to ≥5.0: `npm install typescript@>=5.0 <5.2`",
+      "Enable deferrable views: Use `@defer` and `@placeholder` in templates",
+      "Disable Zone.js for zoneless apps (optional): Remove `zone.js` import",
+      "Migrate to control flow syntax: Use `@if` and `@for` instead of `*ngIf`, `*ngFor`",
+      "Update Angular Material to v17 if used: `ng update @angular/material@17`",
+      "Rebuild and test: `ng build && ng test && ng e2e`"
+    ]
+  },
+  "17-18": {
+    "version": "17 → 18",
+    "items": [
+      "Ensure Node.js ≥18.13 or ≥20: `nvm use 20` or `nvm install 20`",
+      "Update Angular CLI and core to v18: `ng update @angular/cli@18 @angular/core@18`",
+      "Upgrade TypeScript to ≥5.2: `npm install typescript@>=5.2 <5.3`",
+      "Update Angular Material to v18: `ng update @angular/material@18`",
+      "Refactor deprecated lifecycle hooks: Check Angular 18 release notes",
+      "Rebuild and test: `ng build && ng test && ng e2e`"
+    ]
+  },
+  "18-19": {
+    "version": "18 → 19",
+    "items": [
+      "Ensure Node.js ≥18.13 or ≥20: `nvm use 20` or `nvm install 20`",
+      "Update Angular CLI and core to v19: `ng update @angular/cli@19 @angular/core@19`",
+      "Upgrade TypeScript to ≥5.3: `npm install typescript@>=5.3 <5.4`",
+      "Enable standalone imports: Refactor NgModule to standalone APIs",
+      "Review forms APIs: Adopt `formSignal()` for Signals-based forms",
+      "Enable esbuild builder (optional) in angular.json: `\"builder\": \"@angular-devkit/build-angular:esbuild\"`",
+      "Update Angular Material to v19 if used: `ng update @angular/material@19`",
+      "Rebuild and test: `ng build && ng test && ng e2e`"
+    ]
+  },
+  "19-20": {
+    "version": "19 → 20",
+    "items": [
+      "Ensure Node.js ≥20: `nvm use 20` or `nvm install 20`",
+      "Update Angular CLI and core to v20: `ng update @angular/cli@20 @angular/core@20`",
+      "Upgrade TypeScript to ≥5.4: `npm install typescript@>=5.4`",
+      "Adopt Signals and zoneless change detection: Remove `zone.js` import",
+      "Use control-flow syntax by default: `@if`, `@for` in templates",
+      "Update forms to use `formSignal()` for Signals-based reactivity",
+      "Update Angular Material to v20 if used: `ng update @angular/material@20`",
+      "Rebuild, test, and deploy: `ng build && ng test && ng e2e && ng deploy`"
+    ]
+  }
+}
