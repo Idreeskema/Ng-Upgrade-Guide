@@ -1,164 +1,142 @@
 <div class="upgrade-container">
-  <!-- Header Section -->
-  <div class="header-section">
-    <h1 class="main-title">Angular Upgrade Checklist</h1>
-    <p class="subtitle">Streamline your Angular upgrades with our comprehensive checklist</p>
-  </div>
-
-  <!-- Version Selection Card -->
-  <div class="version-card">
-    <div class="version-inputs">
-      <div class="input-group">
-        <label class="input-label">From Version</label>
-        <div class="input-wrapper">
-          <input 
-            type="number" 
-            [(ngModel)]="fromVersion" 
-            min="8" 
-            max="19"
-            class="version-input"
-            (change)="resetChecklist()"
-          />
-          <div class="input-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-              <path d="M6.5 2H20v20l-7-7"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="arrow-separator">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14"></path>
-          <path d="M12 5l7 7-7 7"></path>
-        </svg>
-      </div>
-
-      <div class="input-group">
-        <label class="input-label">To Version</label>
-        <div class="input-wrapper">
-          <input 
-            type="number" 
-            [(ngModel)]="toVersion" 
-            min="9" 
-            max="20"
-            class="version-input"
-            (change)="resetChecklist()"
-          />
-          <div class="input-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M9 11H1l6-6"></path>
-              <path d="M9 11l6 6"></path>
-              <path d="M20 12h-8"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
+    <!-- Header Section -->
+    <div class="header-section">
+        <h1 class="main-title">Angular Upgrade Checklist</h1>
+        <p class="subtitle">Streamline your Angular upgrades with our comprehensive checklist</p>
     </div>
 
-    <button 
-      class="generate-btn"
-      [class.loading]="loading"
-      [disabled]="loading"
-      (click)="loadChecklist()"
-    >
-      <div *ngIf="loading" class="loading-content">
-        <div class="spinner"></div>
-        <span>Generating Checklist...</span>
-      </div>
-      <span *ngIf="!loading">Generate Upgrade Checklist</span>
-    </button>
-  </div>
-
-  <!-- Progress Bar -->
-  <div *ngIf="checklist.length > 0" class="progress-card">
-    <div class="progress-header">
-      <h3 class="progress-title">Progress</h3>
-      <span class="progress-text">
-        {{getCompletedCount()}} of {{getTotalCount()}} tasks completed
-      </span>
-    </div>
-    <div class="progress-bar">
-      <div 
-        class="progress-fill" 
-        [style.width.%]="getProgressPercentage()"
-      ></div>
-    </div>
-    <div class="progress-percentage">
-      {{getProgressPercentage() | number:'1.0-0'}}% Complete
-    </div>
-  </div>
-
-  <!-- Checklist Sections -->
-  <div *ngIf="checklist.length > 0" class="checklist-container">
-    <div *ngFor="let section of checklist; let versionIndex = index" class="checklist-section">
-      <div class="section-header">
-        <div class="section-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14"></path>
-            <path d="M12 5l7 7-7 7"></path>
-          </svg>
-          <span>Angular {{section.version}}</span>
-        </div>
-        <p class="section-subtitle">{{section.items.length}} upgrade steps</p>
-      </div>
-      
-      <div class="items-container">
-        <div 
-          *ngFor="let item of section.items; let itemIndex = index" 
-          class="checklist-item"
-          [class.completed]="isItemCompleted(versionIndex, itemIndex)"
-          (click)="toggleItem(versionIndex, itemIndex)"
-        >
-          <div class="checkbox-wrapper">
-            <div class="checkbox" [class.checked]="isItemCompleted(versionIndex, itemIndex)">
-              <svg 
-                *ngIf="isItemCompleted(versionIndex, itemIndex)"
-                width="16" 
-                height="16" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                stroke-width="3"
-              >
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
+    <!-- Version Selection Card -->
+    <div class="version-card">
+        <div class="version-inputs">
+            <div class="input-group">
+                <label class="input-label">From Version</label>
+                <div class="input-wrapper">
+                    <input type="number" [(ngModel)]="fromVersion" min="8" max="19" class="version-input"
+                        (change)="resetChecklist()" />
+                    <div class="input-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20l-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="item-content">
-            <p class="item-text" [class.completed-text]="isItemCompleted(versionIndex, itemIndex)">
-              {{item}}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
- <div *ngIf="errorMessage" class="error-message">
-    <div class="error-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M15 9l-6 6"></path>
-        <path d="M9 9l6 6"></path>
-      </svg>
-    </div>
-    <span>{{errorMessage}}</span>
-  </div>
-  <!-- Empty State -->
-  <div *ngIf="checklist.length === 0 && !loading && !errorMessage" class="empty-state">
-    <div class="empty-icon">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-        <path d="M6.5 2H20v20l-7-7"></path>
-      </svg>
-    </div>
-    <h3 class="empty-title">Ready to upgrade Angular?</h3>
-    <p class="empty-description">
-      Select your versions and generate a comprehensive upgrade checklist
-    </p>
-  </div>
 
-  <!-- Error Message -->
- 
+            <div class="arrow-separator">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5l7 7-7 7"></path>
+                </svg>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">To Version</label>
+                <div class="input-wrapper">
+                    <input type="number" [(ngModel)]="toVersion" min="9" max="20" class="version-input"
+                        (change)="resetChecklist()" />
+                    <div class="input-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 11H1l6-6"></path>
+                            <path d="M9 11l6 6"></path>
+                            <path d="M20 12h-8"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="generate-btn" [class.loading]="loading" [disabled]="loading" (click)="loadChecklist()">
+            <div *ngIf="loading" class="loading-content">
+                <div class="spinner"></div>
+                <span>Generating Checklist...</span>
+            </div>
+            <span *ngIf="!loading">Generate Upgrade Checklist</span>
+        </button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div *ngIf="checklist.length > 0" class="progress-card">
+        <div class="progress-header">
+            <h3 class="progress-title">Progress</h3>
+            <span class="progress-text">
+                {{getCompletedCount()}} of {{getTotalCount()}} tasks completed
+            </span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="getProgressPercentage()"></div>
+        </div>
+        <div class="progress-percentage">
+            {{getProgressPercentage() | number:'1.0-0'}}% Complete
+        </div>
+    </div>
+
+    <!-- Checklist Sections -->
+    <div *ngIf="checklist.length > 0" class="checklist-container">
+        <div *ngFor="let section of checklist; let versionIndex = index" class="checklist-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                    <span>Angular {{section.version}}</span>
+                </div>
+                <p class="section-subtitle">{{section.items.length}} upgrade steps</p>
+            </div>
+
+            <div class="items-container">
+                <div *ngFor="let item of section.items; let itemIndex = index" class="checklist-item"
+                    [class.completed]="isItemCompleted(versionIndex, itemIndex)"
+                    (click)="toggleItem(versionIndex, itemIndex)">
+                    <div class="checkbox-wrapper">
+                        <div class="checkbox" [class.checked]="isItemCompleted(versionIndex, itemIndex)">
+                            <svg *ngIf="isItemCompleted(versionIndex, itemIndex)" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <p class="item-text" [class.completed-text]="isItemCompleted(versionIndex, itemIndex)">
+                            {{item}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+        <div class="error-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M15 9l-6 6"></path>
+                <path d="M9 9l6 6"></path>
+            </svg>
+        </div>
+        <span>{{errorMessage}}</span>
+    </div>
+    <!-- Empty State -->
+    <div *ngIf="checklist.length === 0 && !loading && !errorMessage" class="empty-state">
+        <div class="empty-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20l-7-7"></path>
+            </svg>
+        </div>
+        <h3 class="empty-title">Ready to upgrade Angular?</h3>
+        <p class="empty-description">
+            Select your versions and generate a comprehensive upgrade checklist
+        </p>
+    </div>
+    <div class="footer">
+        <p class="footer-text">
+            Developed with ❤️ by
+            <a href="https://www.linkedin.com/in/idrees-kema-361b1aa8/" target="_blank" rel="noopener noreferrer"
+                class="footer-author">
+                Idrees Kema
+            </a>
+        </p>
+    </div>
 </div>
